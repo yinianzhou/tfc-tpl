@@ -1,7 +1,7 @@
 <template>
   <div>
     <uix-page-title
-      title="{{name}}"
+      title="{{desc}}"
       :breadcrumb-items="breadcrumbItems"
     ></uix-page-title>
     <div class="wrapper pt-0">

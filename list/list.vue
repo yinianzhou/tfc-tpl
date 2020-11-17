@@ -1,110 +1,106 @@
 <template>
   <div>
-    <uix-page-title title="{{name}}"></uix-page-title>
-    <div class="wrapper pt-0">
-      <div class="panel">
-        <div class="panel-body">
-          <uix-form size="small" label-position="top">
-            <uix-row :gutter="20">
-              <uix-col :sm="6">
-                <uix-form-item label="input">
-                  <uix-input
-                    class="w-full"
-                    size="small"
-                    v-model="searchParams.aaa"
-                  ></uix-input>
-                </uix-form-item>
-              </uix-col>
+    <uix-page-title title="{{desc}}}"></uix-page-title>
+    <uix-card class="wrapper pt-0">
+      <uix-card shadow="never">
+        <uix-form size="small" label-position="top">
+          <uix-row :gutter="20">
+            <uix-col :sm="6">
+              <uix-form-item label="input">
+                <uix-input
+                  class="w-full"
+                  size="small"
+                  v-model="searchParams.aaa"
+                ></uix-input>
+              </uix-form-item>
+            </uix-col>
 
-              <uix-col :sm="6">
-                <uix-form-item label="select">
-                  <uix-select
-                    class="w-full"
-                    filterable
-                    multiple
-                    placeholder="全部"
-                    v-model="searchParams.select"
-                    size="small"
-                  >
-                    <uix-option
-                      v-for="item in selectList"
-                      :key="item.value"
-                      :label="item.name"
-                      :value="item.value"
-                    ></uix-option>
-                  </uix-select>
-                </uix-form-item>
-              </uix-col>
-              <uix-col :sm="12">
-                <uix-form-item label="datepicker">
-                  <uix-date-picker
-                    class="w-full"
-                    v-model="searchParams.date"
-                    size="small"
-                    type="daterange"
-                    range-separator="至"
-                    start-placeholder="开始日期"
-                    end-placeholder="结束日期"
-                  ></uix-date-picker>
-                </uix-form-item>
-              </uix-col>
-            </uix-row>
-            <uix-row :gutter="20"> </uix-row>
-            <uix-row>
-              <uix-col :md="24" class="align-right">
-                <uix-button size="small" type="primary" @click="search()">
-                  查询
-                </uix-button>
-                <uix-button size="small" @click="reset()">重置</uix-button>
-              </uix-col>
-            </uix-row>
-          </uix-form>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel-heading">
+            <uix-col :sm="6">
+              <uix-form-item label="select">
+                <uix-select
+                  class="w-full"
+                  filterable
+                  placeholder="全部"
+                  v-model="searchParams.select"
+                  size="small"
+                >
+                  <uix-option
+                    v-for="item in selectList"
+                    :key="item.value"
+                    :label="item.name"
+                    :value="item.value"
+                  ></uix-option>
+                </uix-select>
+              </uix-form-item>
+            </uix-col>
+            <uix-col :sm="12">
+              <uix-form-item label="datepicker">
+                <uix-date-picker
+                  class="w-full"
+                  v-model="searchParams.date"
+                  size="small"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                ></uix-date-picker>
+              </uix-form-item>
+            </uix-col>
+          </uix-row>
+          <uix-row :gutter="20"> </uix-row>
+          <uix-row>
+            <uix-col :md="24" class="align-right">
+              <uix-button size="small" type="primary" @click="search()">
+                查询
+              </uix-button>
+              <uix-button size="small" @click="reset()">重置</uix-button>
+            </uix-col>
+          </uix-row>
+        </uix-form>
+      </uix-card>
+      <uix-card shadow="never">
+        <div slot="header" class="clearfix">
           <uix-button size="small" type="primary">
             操作按钮
           </uix-button>
         </div>
-        <div class="panel-body clearfix">
-          <uix-table
-            v-loading="loading"
-            :data="tableData"
-            stripe
-            style="width: 100%;min-height:300px;"
-          >
-            <uix-table-column label="aaa" prop="aa" min-width="120">
-            </uix-table-column>
-            <uix-table-column
-              prop="bbb"
-              label="金额"
-              min-width="130"
-              align="right"
-            >
-            </uix-table-column>
-            <uix-table-column fixed="right" min-width="80" label="操作">
-              <template slot-scope="{ row }">
-                <uix-button size="mini">
-                  查看
-                </uix-button>
-              </template>
-            </uix-table-column>
-          </uix-table>
 
-          <uix-pagination
-            v-if="page.pageNo"
-            background
-            class="pull-right mt-md"
-            layout="total, prev, pager, next, jumper"
-            :current-page.sync="page.pageNo"
-            @current-change="getTableData"
-            :page-size="page.pageSize"
-            :total="page.totalCount"
-          ></uix-pagination>
-        </div>
-      </div>
-    </div>
+        <uix-table
+          v-loading="loading"
+          :data="tableData"
+          stripe
+          style="width: 100%;min-height:300px;"
+        >
+          <uix-table-column label="aaa" prop="aa" min-width="120">
+          </uix-table-column>
+          <uix-table-column
+            prop="bbb"
+            label="金额"
+            min-width="130"
+            align="right"
+          >
+          </uix-table-column>
+          <uix-table-column fixed="right" min-width="80" label="操作">
+            <template slot-scope="{ row }">
+              <uix-button size="mini">
+                查看
+              </uix-button>
+            </template>
+          </uix-table-column>
+        </uix-table>
+
+        <uix-pagination
+          v-if="page.pageNo"
+          background
+          class="pull-right mt-md"
+          layout="total, prev, pager, next, jumper"
+          :current-page.sync="page.pageNo"
+          @current-change="getTableData"
+          :page-size="page.pageSize"
+          :total="page.totalCount"
+        ></uix-pagination>
+      </uix-card>
+    </uix-card>
   </div>
 </template>
 
@@ -118,7 +114,6 @@ import { Page, SearchParam } from '../types';
 @Component
 export default class {{name}} extends Vue {
   loading: boolean = false;
-  cacheParams: any = null;
   searchParams: SearchParam = this.getInitParams();
 
   tableData: Array<any> = [];
