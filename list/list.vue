@@ -1,7 +1,7 @@
 <template>
   <div>
-    <uix-page-title title="{{desc}}}"></uix-page-title>
-    <uix-card class="wrapper pt-0">
+    <uix-page-title title="{{desc}}"></uix-page-title>
+    <div class="wrapper pt-0">
       <uix-card shadow="never">
         <uix-form size="small" label-position="top">
           <uix-row :gutter="20">
@@ -20,7 +20,6 @@
                 <uix-select
                   class="w-full"
                   filterable
-                  placeholder="全部"
                   v-model="searchParams.select"
                   size="small"
                 >
@@ -58,7 +57,7 @@
           </uix-row>
         </uix-form>
       </uix-card>
-      <uix-card shadow="never">
+      <uix-card shadow="never" class="mt-md">
         <div slot="header" class="clearfix">
           <uix-button size="small" type="primary">
             操作按钮
@@ -100,7 +99,7 @@
           :total="page.totalCount"
         ></uix-pagination>
       </uix-card>
-    </uix-card>
+    </div>
   </div>
 </template>
 
@@ -112,7 +111,7 @@ import services from '../services';
 import { Page, SearchParam } from '../types';
 
 @Component
-export default class {{name}} extends Vue {
+export default class extends Vue {
   loading: boolean = false;
   searchParams: SearchParam = this.getInitParams();
 
